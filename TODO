@@ -1,0 +1,24 @@
+# ToDo
+
+# Add missing KCODES & CIDS to `controls.js` @app-common and update StandardPadMapping & DefaultKeyCodeToControlMapping
+CIDS = {
+  LTHMBU: 17,
+  LTHMBD: 18,
+  LTHMBL: 19,
+  LTHMBR: 20,
+  RTHMBU: 21,
+  RTHMBD: 22,
+  RTHMBL: 23,
+  RTHMBR: 24,
+}
+
+KCODES = {
+  T: 'KeyT',
+  G: 'KeyG',
+  F: 'KeyF',
+  H: 'KeyH',
+}
+
+# Set shader from feed.json to `getProps().shader` in src/emulator/index.js
+    - from wrapper.js @app-common
+    - from props.js @app-common

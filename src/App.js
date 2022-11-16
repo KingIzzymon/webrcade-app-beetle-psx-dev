@@ -21,7 +21,7 @@ class App extends WebrcadeApp {
   emulator = null;
 
   ALT_BIOS = {
-    c53ca5908936d412331790f4426c6c33: 'PSXONPSP660.bin',
+    'c53ca5908936d412331790f4426c6c33': 'PSXONPSP660.bin',
     '81bbe60ba7a3d1cea1d48c14cbcc647b': 'ps1_rom.bin',
   };
 

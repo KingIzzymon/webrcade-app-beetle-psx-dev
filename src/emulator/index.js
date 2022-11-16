@@ -33,6 +33,14 @@ class PsxKeyCodeToControlMapping extends KeyCodeToControlMapping {
       [KCODES.W]: CIDS.LBUMP, // L1
       [KCODES.E]: CIDS.RBUMP, // R1
       [KCODES.R]: CIDS.RTRIG, // R2
+      [KCODES.T]: CIDS.LTHMBU,
+      [KCODES.G]: CIDS.LTHMBD,
+      [KCODES.F]: CIDS.LTHMBL,
+      [KCODES.H]: CIDS.LTHMBR,
+      [KCODES.I]: CIDS.RTHMBU,
+      [KCODES.K]: CIDS.RTHMBD,
+      [KCODES.J]: CIDS.RTHMBL,
+      [KCODES.L]: CIDS.RTHMBR,
     });
   }
 }
@@ -54,6 +62,14 @@ export class Emulator extends AppWrapper {
   INP_RBUMP = 1 << 13;
   INP_RTRIG = 1 << 14;
   INP_RTHUMB = 1 << 15;
+  INP_LTHMBU = 1 << 16;
+  INP_LTHMBD = 1 << 17;
+  INP_LTHMBL = 1 << 18;
+  INP_LTHMBR = 1 << 19;
+  INP_RTHMBU = 1 << 20;
+  INP_RTHMBD = 1 << 21;
+  INP_RTHMBL = 1 << 22;
+  INP_RTHMBR = 1 << 23;
   CONTROLLER_COUNT = 4;
 
   OPT1 = 1;
@@ -70,6 +86,7 @@ export class Emulator extends AppWrapper {
 
     this.romBytes = null;
     this.biosBuffers = null;
+    this.shaderBuffers = this.getProps().shader;
     this.escapeCount = -1;
     this.audioPlaying = false;
     this.analogMode = this.getProps().analog;
@@ -426,6 +443,11 @@ export class Emulator extends AppWrapper {
       LOG.info('## skip BIOS on');
     }
     Module._wrc_set_options(options);
+    
+    // Shaders
+    if (this.shaderBuffers != null) {
+      LOG.info('## using shader: ' + shaderBuffers);
+    }
   }
 
   getSwapControllers() {
@@ -498,6 +520,13 @@ export class Emulator extends AppWrapper {
       for (let bios in this.biosBuffers) {
         const bytes = this.biosBuffers[bios];
         const path = '/home/web_user/retroarch/userdata/system/' + bios;
+        FS.writeFile(path, bytes);
+      }
+
+      // Copy shader files
+      if ( true ) {
+        const bytes = this.shaderBuffers;
+        const path = '/home/web_user/retroarch/userdata/' + shaderBuffers;
         FS.writeFile(path, bytes);
       }
 
